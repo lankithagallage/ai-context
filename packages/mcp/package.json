@@ -1,0 +1,30 @@
+{
+  "name": "@ai-context/mcp",
+  "version": "0.1.0",
+  "description": "MCP server exposing ai-context recall, save, and list tools to any MCP-aware AI.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "ai-context-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@ai-context/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.10",
+    "typescript": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
