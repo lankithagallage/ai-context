@@ -1,0 +1,17 @@
+{
+  "name": "@ai-context/adapter-claude-code",
+  "version": "0.1.0",
+  "description": "Claude Code PreCompact / SessionEnd hook that pipes transcripts into ai-context capture.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "ai-context-claude-hook": "./scripts/pre-compact.mjs"
+  },
+  "files": [
+    "scripts",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}
