@@ -1,0 +1,18 @@
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+
+# local per-repo state produced by ai-context
+.ai-context/raw/
+.ai-context/index/embeddings.bin
+.ai-context/index/*.sqlite
+.ai-context/index/*.sqlite-journal
