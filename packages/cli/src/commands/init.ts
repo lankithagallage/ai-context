@@ -10,7 +10,7 @@ export function initCommand(): Command {
     .action(async (opts: { force: boolean }) => {
       const root = process.cwd();
       const defaults = ConfigSchema.parse({});
-      const config = { ...defaults, redaction: { patterns: DEFAULT_REDACTION_PATTERNS } };
+      const config = { ...defaults, redaction: { patterns: [...DEFAULT_REDACTION_PATTERNS] } };
       const paths = resolvePaths(root, config);
 
       await Promise.all([
