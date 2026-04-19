@@ -107,8 +107,8 @@ export class InMemoryVectorStore implements VectorStore {
 }
 
 export class HashEmbeddingProvider implements EmbeddingProvider {
-  readonly dimensions = 16;
-  readonly modelId = 'fake-hash-16';
+  readonly dimensions = 64;
+  readonly modelId = 'fake-word-hash-64';
   async embed(texts: readonly string[]): Promise<ReadonlyArray<ReadonlyArray<number>>> {
     return texts.map((t) => toVector(t, this.dimensions));
   }
@@ -153,8 +153,14 @@ function cosineSimilarity(a: ReadonlyArray<number>, b: ReadonlyArray<number>): n
 
 function toVector(text: string, dims: number): number[] {
   const v = new Array<number>(dims).fill(0);
-  for (let i = 0; i < text.length; i += 1) {
-    const idx = text.charCodeAt(i) % dims;
+  const words = text.toLowerCase().split(/\W+/).filter((w) => w.length > 1);
+  for (const word of words) {
+    let h = 2166136261;
+    for (let i = 0; i < word.length; i += 1) {
+      h ^= word.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    const idx = (h >>> 0) % dims;
     v[idx] = (v[idx] ?? 0) + 1;
   }
   const mag = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;
