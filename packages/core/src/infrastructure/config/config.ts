@@ -15,6 +15,7 @@ export const ConfigSchema = z.object({
       baseUrl: z.string().url().default('http://localhost:11434'),
       model: z.string().default('llama3.1:8b'),
       temperature: z.number().min(0).max(2).default(0.2),
+      numCtx: z.number().int().positive().default(8192),
       requestTimeoutMs: z.number().int().positive().default(120_000),
     })
     .default({}),

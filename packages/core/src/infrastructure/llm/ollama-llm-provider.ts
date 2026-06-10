@@ -8,6 +8,7 @@ export interface OllamaConfig {
   readonly baseUrl: string;
   readonly model: string;
   readonly temperature: number;
+  readonly numCtx: number;
   readonly requestTimeoutMs: number;
 }
 
@@ -18,6 +19,7 @@ interface OllamaChatRequest {
   format?: 'json';
   options?: {
     temperature?: number;
+    num_ctx?: number;
     num_predict?: number;
     stop?: string[];
   };
@@ -54,6 +56,7 @@ export class OllamaLLMProvider implements LLMProvider {
       messages: options.messages.map((m) => ({ role: m.role, content: m.content })),
       options: {
         temperature: options.temperature ?? this.config.temperature,
+        num_ctx: this.config.numCtx,
         ...(options.maxTokens !== undefined ? { num_predict: options.maxTokens } : {}),
         ...(options.stop !== undefined ? { stop: [...options.stop] } : {}),
       },
