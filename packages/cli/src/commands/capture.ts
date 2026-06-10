@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { createContainer, type ToolName } from '@ai-context/core';
+import { createContainer, type ToolName } from '@lankithagallage/ai-context-core';
 import { loadConfig } from '../lib/load-config.js';
 import { parseTranscript } from '../lib/parse-transcript.js';
 

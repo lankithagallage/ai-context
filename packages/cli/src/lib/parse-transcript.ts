@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type { RawTranscript, ToolName } from '@ai-context/core';
+import type { RawTranscript, ToolName } from '@lankithagallage/ai-context-core';
 
 export interface ParseTranscriptOptions {
   readonly filePath: string;

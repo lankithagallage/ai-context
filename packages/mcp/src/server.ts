@@ -10,7 +10,7 @@ import {
   type AiContextConfig,
   type Container,
   type ToolName,
-} from '@ai-context/core';
+} from '@lankithagallage/ai-context-core';
 
 const TOOL_NAMES: readonly ToolName[] = [
   'claude-code',

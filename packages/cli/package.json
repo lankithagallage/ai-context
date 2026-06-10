@@ -1,5 +1,5 @@
 {
-  "name": "@ai-context/cli",
+  "name": "@lankithagallage/ai-context-cli",
   "version": "0.1.0",
   "description": "ai-context command-line interface.",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@ai-context/core": "workspace:*",
+    "@lankithagallage/ai-context-core": "workspace:*",
     "commander": "^12.1.0"
   },
   "devDependencies": {

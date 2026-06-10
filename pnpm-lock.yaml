@@ -22,7 +22,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@ai-context/core':
+      '@lankithagallage/ai-context-core':
         specifier: workspace:*
         version: link:../core
       commander:
@@ -69,7 +69,7 @@ importers:
 
   packages/mcp:
     dependencies:
-      '@ai-context/core':
+      '@lankithagallage/ai-context-core':
         specifier: workspace:*
         version: link:../core
       '@modelcontextprotocol/sdk':

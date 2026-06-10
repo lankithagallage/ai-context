@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { Command } from 'commander';
-import { ConfigSchema, resolvePaths, DEFAULT_REDACTION_PATTERNS } from '@ai-context/core';
+import { ConfigSchema, resolvePaths, DEFAULT_REDACTION_PATTERNS } from '@lankithagallage/ai-context-core';
 
 export function initCommand(): Command {
   return new Command('init')
@@ -116,7 +116,7 @@ async function writeMcpRegistration(root: string): Promise<void> {
   if ((current.mcpServers as Record<string, unknown>)['ai-context']) return;
   (current.mcpServers as Record<string, unknown>)['ai-context'] = {
     command: 'npx',
-    args: ['-y', '@ai-context/mcp'],
+    args: ['-y', '@lankithagallage/ai-context-mcp'],
   };
   await fs.writeFile(file, JSON.stringify(current, null, 2) + '\n', 'utf8');
   process.stdout.write(`updated ${file}\n`);

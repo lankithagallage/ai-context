@@ -5,7 +5,7 @@ import {
   resolvePaths,
   type AiContextConfig,
   type ResolvedPaths,
-} from '@ai-context/core';
+} from '@lankithagallage/ai-context-core';
 
 export interface LoadedConfig {
   readonly workspaceRoot: string;

@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { createContainer } from '@ai-context/core';
+import { createContainer } from '@lankithagallage/ai-context-core';
 import { loadConfig } from '../lib/load-config.js';
 
 export function recallCommand(): Command {

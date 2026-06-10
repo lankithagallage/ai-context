@@ -43,16 +43,16 @@ Requirements:
 ```bash
 # 1. Initialise the per-repo store
 cd /path/to/your/project
-npx @ai-context/cli init
+npx @lankithagallage/ai-context-cli init
 
 # 2. Capture a session by hand (or wire up the hook — see below)
-npx @ai-context/cli capture --tool claude-code --file path/to/transcript.jsonl
+npx @lankithagallage/ai-context-cli capture --tool claude-code --file path/to/transcript.jsonl
 
 # 3. From any future AI session: recall relevant context before editing
-npx @ai-context/cli recall "what does the auth middleware expect?"
+npx @lankithagallage/ai-context-cli recall "what does the auth middleware expect?"
 
 # 4. Check the store's health
-npx @ai-context/cli status
+npx @lankithagallage/ai-context-cli status
 ```
 
 ## Auto-capture with Claude Code
@@ -60,7 +60,7 @@ npx @ai-context/cli status
 Install the hook adapter in your target repo:
 
 ```bash
-pnpm add -D @ai-context/adapter-claude-code
+pnpm add -D @lankithagallage/ai-context-adapter-claude-code
 ```
 
 Then add to `.claude/settings.json`:
@@ -69,10 +69,10 @@ Then add to `.claude/settings.json`:
 {
   "hooks": {
     "PreCompact": [
-      { "hooks": [{ "type": "command", "command": "npx -y @ai-context/adapter-claude-code" }] }
+      { "hooks": [{ "type": "command", "command": "npx -y @lankithagallage/ai-context-adapter-claude-code" }] }
     ],
     "SessionEnd": [
-      { "hooks": [{ "type": "command", "command": "npx -y @ai-context/adapter-claude-code" }] }
+      { "hooks": [{ "type": "command", "command": "npx -y @lankithagallage/ai-context-adapter-claude-code" }] }
     ]
   }
 }
@@ -80,7 +80,7 @@ Then add to `.claude/settings.json`:
 
 ## Cross-AI via MCP
 
-`@ai-context/mcp` exposes three tools over stdio MCP — compatible with Claude
+`@lankithagallage/ai-context-mcp` exposes three tools over stdio MCP — compatible with Claude
 Code, Cursor, Windsurf, Cline, Continue, and any other MCP client:
 
 | Tool              | Use                                                            |
@@ -101,10 +101,10 @@ Packages:
 
 | Package                           | What it is                               |
 |-----------------------------------|------------------------------------------|
-| `@ai-context/core`                | Domain, application, infrastructure      |
-| `@ai-context/cli`                 | `ai-context` CLI                         |
-| `@ai-context/mcp`                 | MCP server                               |
-| `@ai-context/adapter-claude-code` | PreCompact / SessionEnd hook             |
+| `@lankithagallage/ai-context-core`                | Domain, application, infrastructure      |
+| `@lankithagallage/ai-context-cli`                 | `ai-context` CLI                         |
+| `@lankithagallage/ai-context-mcp`                 | MCP server                               |
+| `@lankithagallage/ai-context-adapter-claude-code` | PreCompact / SessionEnd hook             |
 
 ## Layout per target repo
 
