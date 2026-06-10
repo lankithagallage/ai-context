@@ -1,6 +1,6 @@
 {
   "name": "@lankithagallage/ai-context-adapter-claude-code",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Claude Code PreCompact / SessionEnd hook that pipes transcripts into ai-context capture.",
   "license": "MIT",
   "repository": {
