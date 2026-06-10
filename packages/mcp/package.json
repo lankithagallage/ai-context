@@ -1,6 +1,6 @@
 {
   "name": "@lankithagallage/ai-context-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server exposing ai-context recall, save, and list tools to any MCP-aware AI.",
   "license": "MIT",
   "repository": {
