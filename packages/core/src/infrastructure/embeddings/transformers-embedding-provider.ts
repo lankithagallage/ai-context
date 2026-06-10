@@ -1,8 +1,24 @@
+import os from 'node:os';
+import path from 'node:path';
 import type { EmbeddingProvider } from '../../application/ports/embedding-provider.js';
 
 export interface TransformersEmbeddingConfig {
   readonly model: string;
   readonly dimensions: number;
+}
+
+// Shared, persistent model cache so the embeddings model is downloaded once and
+// reused across every entrypoint (local build, `npx` CLI/MCP/adapter — each of
+// which otherwise gets its own empty cache inside a throwaway npx dir and
+// re-downloads ~90MB from HuggingFace on first use, which can fail on flaky
+// networks). Honors HF_HOME / TRANSFORMERS_CACHE if the user already set one.
+function resolveModelCacheDir(): string {
+  return (
+    process.env.AI_CONTEXT_MODEL_CACHE ??
+    process.env.TRANSFORMERS_CACHE ??
+    (process.env.HF_HOME ? path.join(process.env.HF_HOME, 'transformers') : undefined) ??
+    path.join(os.homedir(), '.cache', 'ai-context', 'models')
+  );
 }
 
 type FeatureExtractor = (
@@ -23,7 +39,10 @@ export class TransformersEmbeddingProvider implements EmbeddingProvider {
   }
 
   static async create(config: TransformersEmbeddingConfig): Promise<TransformersEmbeddingProvider> {
-    const { pipeline } = await import('@huggingface/transformers');
+    const { pipeline, env } = await import('@huggingface/transformers');
+    // Point every invocation at one persistent cache so the model is fetched at
+    // most once, not re-downloaded per npx temp dir.
+    env.cacheDir = resolveModelCacheDir();
     const extractor = (await pipeline('feature-extraction', config.model)) as unknown as FeatureExtractor;
     return new TransformersEmbeddingProvider(extractor, config);
   }
