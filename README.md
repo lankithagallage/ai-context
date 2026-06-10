@@ -23,37 +23,38 @@ making changes.
 Nothing leaves your machine: embeddings run via `@huggingface/transformers`
 (ONNX in Node), distillation runs via Ollama on localhost.
 
-## Install
+## Quickstart
+
+Requirements: **Node.js 20+** and **[Ollama](https://ollama.com)** running locally
+with a model pulled (e.g. `ollama pull llama3.1:8b`).
 
 ```bash
-pnpm install
-pnpm -r run build
-```
-
-Requirements:
-
-- Node.js 20+
-- pnpm 9+
-- [Ollama](https://ollama.com) running locally with a model pulled
-  (e.g. `ollama pull llama3.1:8b`)
-- Native build tools for `better-sqlite3` (only needed at install time)
-
-## Use it in a target repo
-
-```bash
-# 1. Initialise the per-repo store
+# 1. Initialise the store in your project (creates AI_CONTEXT.md, CLAUDE.md
+#    snippet, .mcp.json, and .ai-context/)
 cd /path/to/your/project
 npx @lankithagallage/ai-context-cli init
 
-# 2. Capture a session by hand (or wire up the hook — see below)
-npx @lankithagallage/ai-context-cli capture --tool claude-code --file path/to/transcript.jsonl
+# 2. Install the Claude Code hook
+pnpm add -D @lankithagallage/ai-context-adapter-claude-code
 
-# 3. From any future AI session: recall relevant context before editing
+# 3. Add hooks to .claude/settings.json (see Auto-capture section below)
+
+# 4. From any future AI session: recall relevant context before editing
 npx @lankithagallage/ai-context-cli recall "what does the auth middleware expect?"
 
-# 4. Check the store's health
+# 5. Check the store's health
 npx @lankithagallage/ai-context-cli status
 ```
+
+## What `init` creates
+
+| File | Purpose |
+|------|---------|
+| `.ai-context/` | Store root — sessions, facts, decisions, vector index |
+| `AI_CONTEXT.md` | Pointer file for AI tools that don't use MCP |
+| `CLAUDE.md` | Recall instruction snippet appended automatically |
+| `.cursorrules` | Same snippet for Cursor |
+| `.mcp.json` | Registers the MCP server for Claude Code / Cursor / Windsurf |
 
 ## Auto-capture with Claude Code
 
