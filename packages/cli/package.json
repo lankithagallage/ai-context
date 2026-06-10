@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "ai-context command-line interface.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lankithagallage/ai-context",
+    "directory": "packages/cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "ai-context": "./dist/index.js"

@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "Domain, application, and infrastructure for ai-context.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lankithagallage/ai-context",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

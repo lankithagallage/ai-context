@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --version)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m *)",
+      "Bash(git remote *)",
+      "Bash(corepack enable *)",
+      "Bash(corepack prepare *)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

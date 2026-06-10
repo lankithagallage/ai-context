@@ -83,6 +83,8 @@ export class SqliteVecStore implements VectorStore {
         const existing = getRowId.get(chunk.id) as { rowid: number } | undefined;
         const rowid =
           existing?.rowid ?? ((nextRowId.get() as { next: number }).next as number);
+        // sqlite-vec requires strict SQLITE_INTEGER type — BigInt ensures that
+        const rowidBig = BigInt(rowid);
 
         if (existing) {
           updateChunk.run(
@@ -93,7 +95,7 @@ export class SqliteVecStore implements VectorStore {
             chunk.createdAt.toISOString(),
             chunk.id,
           );
-          deleteVec.run(rowid);
+          deleteVec.run(rowidBig);
         } else {
           insertChunk.run(
             chunk.id,
@@ -105,7 +107,7 @@ export class SqliteVecStore implements VectorStore {
             chunk.createdAt.toISOString(),
           );
         }
-        insertVec.run(rowid, vec);
+        insertVec.run(rowidBig, vec);
       }
     });
 
@@ -122,7 +124,7 @@ export class SqliteVecStore implements VectorStore {
       for (const id of ids) {
         const row = selectRow.get(id) as { rowid: number } | undefined;
         if (!row) continue;
-        deleteVec.run(row.rowid);
+        deleteVec.run(BigInt(row.rowid));
         deleteChunk.run(id);
       }
     });

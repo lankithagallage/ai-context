@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "MCP server exposing ai-context recall, save, and list tools to any MCP-aware AI.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lankithagallage/ai-context",
+    "directory": "packages/mcp"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "ai-context-mcp": "./dist/index.js"

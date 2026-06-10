@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "Claude Code PreCompact / SessionEnd hook that pipes transcripts into ai-context capture.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lankithagallage/ai-context",
+    "directory": "packages/adapter-claude-code"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "ai-context-claude-hook": "./scripts/pre-compact.mjs"

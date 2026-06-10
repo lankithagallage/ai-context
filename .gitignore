@@ -11,6 +11,9 @@ coverage/
 .DS_Store
 Thumbs.db
 
+# Claude Code machine-specific settings
+.claude/settings.local.json
+
 # local per-repo state produced by ai-context
 .ai-context/raw/
 .ai-context/index/embeddings.bin

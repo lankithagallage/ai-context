@@ -9,6 +9,19 @@
 
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+// Resolve the CLI without relying on a published package. Prefer an explicit
+// override, then the sibling built dist in this monorepo, then fall back to npx
+// (for installs where @ai-context/cli is actually published).
+function resolveCliCommand() {
+  const override = process.env.AI_CONTEXT_CLI;
+  if (override && existsSync(override)) return { cmd: 'node', pre: [override] };
+  const localDist = fileURLToPath(new URL('../../cli/dist/index.js', import.meta.url));
+  if (existsSync(localDist)) return { cmd: 'node', pre: [localDist] };
+  return { cmd: 'npx', pre: ['-y', '@ai-context/cli'] };
+}
 
 async function readStdin() {
   const chunks = [];
@@ -54,9 +67,10 @@ async function main() {
   }
 
   await new Promise((resolve) => {
+    const { cmd, pre } = resolveCliCommand();
     const child = spawn(
-      'npx',
-      ['-y', '@ai-context/cli', 'capture', '--file', transcriptPath, '--tool', 'claude-code'],
+      cmd,
+      [...pre, 'capture', '--file', transcriptPath, '--tool', 'claude-code'],
       { stdio: 'inherit', shell: process.platform === 'win32' },
     );
     child.on('close', () => resolve(undefined));
